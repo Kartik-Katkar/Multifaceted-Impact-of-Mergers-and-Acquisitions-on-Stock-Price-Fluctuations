@@ -60,9 +60,11 @@ def handle_pdf(file_path):
         append_to_text_file(text)
 
 def handle_csv(file_path):
-    df = pd.read_csv(file_path)
-    text = df.to_csv(index=False)
-    append_to_text_file(text)
+    chunksize = 500
+    reader = pd.read_csv(file_path, chunksize=chunksize)
+    for chunk in reader:
+        text = chunk.to_string(index=False)
+        append_to_text_file(text)
 
 def handle_video(file_path):
     # Placeholder function for handling video files
