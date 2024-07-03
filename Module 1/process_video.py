@@ -1,46 +1,40 @@
 import os
-import whisper
 import ffmpeg
+import whisper
 
-video_path = './Test Documents/video with audio.mp4'
+def handle_video(file_path):
+    try:
+        probe = ffmpeg.probe(file_path)
+        audio_streams = [stream for stream in probe['streams'] if stream['codec_type'] == 'audio']
+        if audio_streams:
+            append_to_text_file(f'Video file {file_path} has audio.\n')
+            audio_file = 'temp_audio.wav'
+            success = extract_audio(file_path, audio_file)
+            if success:
+                audio_text = transcribe_audio(audio_file)
+                os.remove(audio_file)  # Remove temporary audio file
+                append_to_text_file(audio_text)
+            else:
+                append_to_text_file("Audio extraction failed.\n")
+        else:
+            append_to_text_file(f'Video file {file_path} does not have audio.\n')
+    except ffmpeg.Error as e:
+        append_to_text_file(f'An error occurred while processing the video file {file_path}: {e.stderr.decode("utf-8")}\n')
 
-if not os.path.exists(video_path):
-    raise Exception(f"Video file '{video_path}' does not exist.")
-
-# Function to extract audio from video using FFmpeg
 def extract_audio(video_path, audio_file):
     try:
         ffmpeg.input(video_path).output(audio_file, acodec='pcm_s16le').run()
         return True
     except Exception as e:
-        print(f"Error extracting audio: {str(e)}")
+        append_to_text_file(f"Error extracting audio: {str(e)}\n")
         return False
 
-# Function to transcribe audio using OpenAI Whisper
 def transcribe_audio(audio_path):
     model = whisper.load_model("base")
     result = model.transcribe(audio_path)
     return result['text']
 
-# Extract audio from the video
-audio_file = 'temp_audio.wav'
-success = extract_audio(video_path, audio_file)
-
-if success:
-    print(f"Extracted audio to {audio_file}")
-
-    # Transcribe the audio
-    audio_text = transcribe_audio(audio_file)
-    os.remove(audio_file)  # Remove temporary audio file
-
-else:
-    audio_text = "Audio extraction failed."
-
-output_file = 'data.txt'
-
-with open(output_file, 'a') as f:  # Changed to 'a' to append instead of overwrite
-    f.write("Speech-to-Text Transcription:\n")
-    f.write(audio_text)
-    f.write("\n")
-
-print(f"Transcription appended to '{output_file}' successfully.")
+def append_to_text_file(content):
+    TEXT_FILE = 'data.txt'
+    with open(TEXT_FILE, 'a', encoding='utf-8') as f:
+        f.write(content + '\n')

@@ -10,7 +10,8 @@ import secrets
 # for scraping and handling HTML 
 import requests
 from bs4 import BeautifulSoup
-from scrape import scrape_content, extract_text
+from process_web import scrape_content, extract_text
+from process_video import handle_video
 
 load_dotenv()
 
@@ -86,10 +87,6 @@ def handle_csv(file_path):
     for chunk in reader:
         text = chunk.to_string(index=False)
         append_to_text_file(text)
-
-def handle_video(file_path):
-    # Placeholder function for handling video files
-    append_to_text_file(f'Video file {file_path} processed.\n')
 
 def handle_html(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
