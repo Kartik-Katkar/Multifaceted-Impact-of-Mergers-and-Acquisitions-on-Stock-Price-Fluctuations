@@ -8,3 +8,9 @@ create a .env file in the same directory and copy the envstructure.txt and place
 
 get the webscraperAPI key from https://www.scraperapi.com/ website (free trial) and replace YOUR_ACTUAL_SCRAPERAPI_KEY with your actual 
 ScraperAPI key in .env file.
+
+for video processing
+pip install openai-whisper ffmpeg-python pytube torch
+pip install numpy<2
+
+must have ffmpeg installed https://www.youtube.com/watch?v=jZLqNocSQDM 
