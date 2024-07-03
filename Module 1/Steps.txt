@@ -2,4 +2,9 @@ cd flask_app
 python -m venv venv
 source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
 
-pip install Flask PyPDF2 pandas beautifulsoup4
+pip install Flask PyPDF2 pandas beautifulsoup4 requests python-dotenv
+
+create a .env file in the same directory and copy the envstructure.txt and place your contents in .env.
+
+get the webscraperAPI key from https://www.scraperapi.com/ website (free trial) and replace YOUR_ACTUAL_SCRAPERAPI_KEY with your actual 
+ScraperAPI key in .env file.

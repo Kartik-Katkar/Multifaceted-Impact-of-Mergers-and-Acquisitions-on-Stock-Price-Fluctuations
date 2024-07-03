@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload</title>
+    <title>File Upload or URL Entry</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Upload a File</h1>
+    <h1>Upload a File or Enter a URL</h1>
 
     <!-- Display flash messages -->
     {% with messages = get_flashed_messages() %}
@@ -21,8 +21,15 @@
     {% endwith %}
 
     <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept=".pdf,.csv,.mp4,.html" required>
-        <button type="submit">Upload</button>
+        <label for="url">Enter URL:</label>
+        <input type="text" id="url" name="url" placeholder="https://example.com">
+        
+        <p>OR</p>
+
+        <label for="file">Upload a File:</label>
+        <input type="file" id="file" name="file" accept=".pdf,.csv,.mp4,.html">
+        
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
