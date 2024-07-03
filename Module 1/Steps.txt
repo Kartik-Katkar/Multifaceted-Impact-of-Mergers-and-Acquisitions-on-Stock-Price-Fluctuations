@@ -14,3 +14,6 @@ pip install openai-whisper ffmpeg-python pytube torch
 pip install numpy<2
 
 must have ffmpeg installed https://www.youtube.com/watch?v=jZLqNocSQDM 
+
+for image processing
+pip install easyocr opencv-python

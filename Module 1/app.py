@@ -12,6 +12,7 @@ import requests
 from bs4 import BeautifulSoup
 from process_web import scrape_content, extract_text
 from process_video import handle_video
+from process_image import process_single_image
 
 load_dotenv()
 
@@ -66,6 +67,9 @@ def upload_file():
             handle_video(file_path)
         elif file.filename.endswith('.html'):
             handle_html(file_path)
+        # elif file.filename.endswith('.jpeg'):
+        elif file.filename.endswith(('.jpg', '.jpeg', '.png', '.bmp', '.gif')):
+            process_single_image(file_path, TEXT_FILE)
         
         flash('File successfully processed')
     else:
