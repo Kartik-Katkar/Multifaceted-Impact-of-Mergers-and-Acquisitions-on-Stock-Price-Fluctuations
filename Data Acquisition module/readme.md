@@ -4,3 +4,4 @@ reading data from pdf,csv,.html to text
 webscraper with api's content to text
 video -> text => processing video with audio -> remove audio -> audio to text through openAI Whisper and FFmpeg
 video without audio => context understing with LLM GPT Vision Pro
+used multithreading for automated scraping

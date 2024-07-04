@@ -17,3 +17,5 @@ must have ffmpeg installed https://www.youtube.com/watch?v=jZLqNocSQDM
 
 for image processing
 pip install easyocr opencv-python
+
+used multithreading for automating the scraping and appending process 

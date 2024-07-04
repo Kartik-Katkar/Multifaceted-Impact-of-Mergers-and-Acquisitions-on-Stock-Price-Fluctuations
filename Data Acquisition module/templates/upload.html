@@ -5,6 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Upload or URL Entry</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script>
+        function submitForm() {
+            document.getElementById('submit-button').disabled = true;
+            document.getElementById('stop-button').disabled = false;
+            document.getElementById('upload-form').submit();
+        }
+
+        function stopScraping() {
+            document.getElementById('stop-button').disabled = true;
+            document.getElementById('submit-button').disabled = false;
+            document.getElementById('stop-scraping-form').submit();
+        }
+    </script>
 </head>
 <body>
     <h1>Upload a File or Enter a URL</h1>
@@ -20,15 +33,23 @@
         {% endif %}
     {% endwith %}
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <!-- Form for URL entry -->
+    <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
         <label for="url">Enter URL:</label>
         <input type="text" id="url" name="url" placeholder="https://example.com">
-        
-        <p>OR</p>
+        <button type="button" onclick="submitForm()" id="submit-button">Start Scraping</button>
+    </form>
 
+    <form id="stop-scraping-form" action="/stop_scraping" method="post">
+        <button type="button" onclick="stopScraping()" id="stop-button">Stop Scraping</button>
+    </form>
+
+    <p>OR</p>
+
+    <!-- Form for file upload -->
+    <form id="file-upload-form" action="/upload" method="post" enctype="multipart/form-data">
         <label for="file">Upload a File:</label>
-        <input type="file" id="file" name="file" accept=".pdf,.csv,.mp4,.html">
-        
+        <input type="file" id="file" name="file" accept=".pdf,.csv,.mp4,.html,.jpg,.jpeg,.png,.bmp,.gif">
         <button type="submit">Submit</button>
     </form>
 </body>

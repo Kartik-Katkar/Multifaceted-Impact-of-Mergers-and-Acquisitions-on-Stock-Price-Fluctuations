@@ -7,7 +7,8 @@ import secrets
 
 # for scraping and handling HTML 
 import requests
-from process_web import scrape_content, extract_text
+import threading
+from process_web import scrape_content, extract_text, start_scraping, stop_scraping_process
 from process_video import handle_video
 from process_image import process_single_image
 from handlers import handle_csv,handle_html,handle_pdf,append_to_text_file
@@ -31,19 +32,25 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def index():
     return render_template('upload.html')
 
+@app.route('/stop_scraping', methods=['POST'])
+def stop_scraping():
+    stop_scraping_process()
+    flash('Scraping stopped.')
+    return redirect(url_for('index'))
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
+
+    global scraping_thread
     url = request.form.get('url')
     file = request.files.get('file')
 
     if url:
-        html_content = scrape_content(url,scrape_api_key)
-        if html_content:
-            text_content = extract_text(html_content)
-            append_to_text_file(text_content)
-            print(f'Content from {url} has been appended to {TEXT_FILE}.')
-        else:
-            print(f'Failed to scrape content from {url}.')
+        if not url.startswith('http'):
+            url = 'http://' + url
+        start_scraping(url, scrape_api_key)
+        flash(f'Started scraping {url} every 5 minutes.')
+
     elif file:
         if file.filename == '':
             flash('No selected file')
@@ -72,7 +79,7 @@ def upload_file():
         flash('File successfully processed')
     else:
         flash('No URL or file provided')
-    
+
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
