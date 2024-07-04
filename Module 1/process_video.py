@@ -1,6 +1,7 @@
 import os
 import ffmpeg
 import whisper
+from process_onlyvideo import video_to_base64,generate_script_gemini
 
 def handle_video(file_path):
     try:
@@ -17,7 +18,14 @@ def handle_video(file_path):
             else:
                 append_to_text_file("Audio extraction failed.\n")
         else:
-            append_to_text_file(f'Video file {file_path} does not have audio.\n')
+            # append_to_text_file(f'Video file {file_path} does not have audio.\n')
+            base64Frames = video_to_base64(file_path, sample_rate=300)
+            if base64Frames:
+                content = generate_script_gemini(base64Frames)
+                append_to_text_file(content)
+            else:
+                append_to_text_file("Some issue with Gemini.\n")
+
     except ffmpeg.Error as e:
         append_to_text_file(f'An error occurred while processing the video file {file_path}: {e.stderr.decode("utf-8")}\n')
 
