@@ -1,18 +1,16 @@
 from flask import Flask, request, render_template, redirect, url_for, flash
 import os
 from dotenv import load_dotenv
-import PyPDF2
-import pandas as pd
 
 # for session handling 
 import secrets
 
 # for scraping and handling HTML 
 import requests
-from bs4 import BeautifulSoup
 from process_web import scrape_content, extract_text
 from process_video import handle_video
 from process_image import process_single_image
+from handlers import handle_csv,handle_html,handle_pdf,append_to_text_file
 
 load_dotenv()
 
@@ -76,31 +74,6 @@ def upload_file():
         flash('No URL or file provided')
     
     return redirect(url_for('index'))
-
-def handle_pdf(file_path):
-    reader = PyPDF2.PdfReader(file_path)
-    num_pages = len(reader.pages)
-    for page_num in range(num_pages):
-        page = reader.pages[page_num]
-        text = page.extract_text()
-        append_to_text_file(text)
-
-def handle_csv(file_path):
-    chunksize = 500
-    reader = pd.read_csv(file_path, chunksize=chunksize)
-    for chunk in reader:
-        text = chunk.to_string(index=False)
-        append_to_text_file(text)
-
-def handle_html(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
-        soup = BeautifulSoup(file, 'html.parser')
-        text = soup.get_text()
-        append_to_text_file(text)
-
-def append_to_text_file(content):
-    with open(TEXT_FILE, 'a', encoding='utf-8') as f:
-        f.write(content + '\n')
 
 if __name__ == '__main__':
     app.run(debug=True)

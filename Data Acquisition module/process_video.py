@@ -2,6 +2,7 @@ import os
 import ffmpeg
 import whisper
 from process_onlyvideo import video_to_base64,generate_script_gemini
+from handlers import append_to_text_file
 
 def handle_video(file_path):
     try:
@@ -41,8 +42,3 @@ def transcribe_audio(audio_path):
     model = whisper.load_model("base")
     result = model.transcribe(audio_path)
     return result['text']
-
-def append_to_text_file(content):
-    TEXT_FILE = 'data.txt'
-    with open(TEXT_FILE, 'a', encoding='utf-8') as f:
-        f.write(content + '\n')
