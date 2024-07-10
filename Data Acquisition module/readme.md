@@ -2,7 +2,7 @@
 
 The module encompasses multiple functionalities aimed at extracting and processing diverse data sources such as PDFs, CSVs, and HTML into text, alongside web scraping via APIs for content extraction. It includes advanced video processing capabilities using OpenAI Whisper and FFmpeg for converting video content to text, as well as context understanding for videos lacking audio using LLM GPT Vision Pro. Multithreading is implemented to automate scraping tasks efficiently. Additionally, to avoid constant reliance on external APIs like LLM, the project emphasizes training custom AI models for filtering malicious prompts. This approach involves generating a dedicated dataset and training an AI model, with further details available in the Malicious Prompt Filter Repository.
 
-![Module Demo](Screenshots/Project.gif)
+![Module Demo](Screenshots/project.gif)
 
 ## Installation
 
