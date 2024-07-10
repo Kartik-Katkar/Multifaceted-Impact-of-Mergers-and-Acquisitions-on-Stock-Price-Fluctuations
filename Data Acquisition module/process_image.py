@@ -1,5 +1,5 @@
 import easyocr
-from handlers import append_to_text_file
+from Ragfilter import classify_and_append
 
 def extract_text_from_image(image_path):
     reader = easyocr.Reader(['en'])
@@ -20,6 +20,5 @@ def extract_text_from_image(image_path):
 
 def process_single_image(image_path, output_file):
     text = extract_text_from_image(image_path)
-    # append_text_to_file(text, output_file)
-    append_to_text_file(text)
+    classify_and_append(text)
     print(f"Processed {image_path} and appended text to {output_file}")

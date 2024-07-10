@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import threading
 import time
-from handlers import append_to_text_file
+from Ragfilter import classify_and_append
 
 # Global variables for threading and stopping mechanism
 scraping_thread = None
@@ -29,7 +29,7 @@ def scrape_periodically(url, api_key):
         html_content = scrape_content(url, api_key)
         if html_content:
             text_content = extract_text(html_content)
-            append_to_text_file(text_content)
+            classify_and_append(text_content)
             print(f'Content from {url} has been appended.')
         else:
             print(f'Failed to scrape content from {url}.')

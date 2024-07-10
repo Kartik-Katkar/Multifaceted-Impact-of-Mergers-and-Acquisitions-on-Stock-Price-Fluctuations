@@ -11,7 +11,8 @@ import threading
 from process_web import scrape_content, extract_text, start_scraping, stop_scraping_process
 from process_video import handle_video
 from process_image import process_single_image
-from handlers import handle_csv,handle_html,handle_pdf,append_to_text_file
+from handlers import handle_csv,handle_html,handle_pdf
+from Ragfilter import classify_and_append
 
 load_dotenv()
 
