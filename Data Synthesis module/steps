@@ -8,8 +8,8 @@ python -m venv env
 source env/bin/activate
 
 pip install nltk python-dotenv sentence-transformers numpy
-pip install langchain
-pip install faiss-cpu
+pip install faiss-cpu flask
+
 
 run the below python code
 # Initialize NLTK resources
