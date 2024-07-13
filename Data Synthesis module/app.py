@@ -1,8 +1,10 @@
+import os
 from flask import Flask, render_template, request
 from sentence_transformers import SentenceTransformer
 import faiss
 import json
 import numpy as np
+from RAG_prompt import make_rag_prompt,generate_answer
 
 app = Flask(__name__)
 model = SentenceTransformer('all-MiniLM-L6-v2')
@@ -39,12 +41,11 @@ def ask():
             with open(chunk_file_path, 'r', encoding='utf-8') as chunk_file:
                 chunk_text = chunk_file.read()
                 results.append(chunk_text)
-        # for idx in indices[0]:
-        #     # Dummy content, replace with actual data retrieval and formatting
-        #     result_text = f"Result {idx}"
-        #     results.append(result_text)
+        
+        final_prompt = make_rag_prompt(question,results)
+        answer = generate_answer(final_prompt)
 
-        return render_template('result.html', question=question, results=results)
+        return render_template('result.html', question=question, result_text=answer)
 
 if __name__ == '__main__':
     app.run(debug=True)

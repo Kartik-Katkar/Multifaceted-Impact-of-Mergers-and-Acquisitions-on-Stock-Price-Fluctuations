@@ -10,12 +10,8 @@
     <div class="container">
         <h1>Results</h1>
         <p><strong>Question:</strong> {{ question }}</p>
-        <h2>Top Results:</h2>
-        <ul>
-            {% for result in results %}
-                <li>{{ result }}</li>
-            {% endfor %}
-        </ul>
+        <h2>Result</h2>
+        <p>{{ result_text }}</p>
     </div>
 </body>
 </html>

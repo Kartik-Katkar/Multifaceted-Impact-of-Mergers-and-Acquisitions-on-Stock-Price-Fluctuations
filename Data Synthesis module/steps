@@ -16,3 +16,8 @@ run the below python code
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
+
+started the LLM based response part
+
+pip install -q -U google-generativeai
+pip install python-dotenv

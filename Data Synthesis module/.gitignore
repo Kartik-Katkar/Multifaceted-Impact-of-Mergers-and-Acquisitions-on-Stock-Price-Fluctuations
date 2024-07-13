@@ -1,3 +1,5 @@
 env/
 FAISS_INDEX/chunks/
 FAISS_INDEX/chunk_file_map.json
+.env
+__pycache__
