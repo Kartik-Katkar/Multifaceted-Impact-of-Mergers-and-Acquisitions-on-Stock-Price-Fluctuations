@@ -1,0 +1,63 @@
+body {
+    font-family: "San Francisco", "Helvetica Neue", Arial, sans-serif; /* Setting Apple font or fallback */
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0; /* Set a light background */
+    display: flex;
+    justify-content: center; /* Center align content horizontally */
+    align-items: center; /* Center align content vertically */
+    height: 100vh; /* Ensure full viewport height */
+}
+
+h1 {
+    text-align: center;
+    color: #333; /* Dark text color */
+}
+
+.glassmorphism {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    width: 100%; /* Ensure card fills its container */
+    max-width: 400px; /* Limit card width for readability */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ensure forms fill the card */
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc; /* Light border */
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+}
+
+.button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.button5 {
+    background-color: white;
+    color: #333; /* Dark text color */
+    border: 2px solid #555555;
+}
+
+.button5:hover {
+    background-color: #555555;
+    color: white;
+}

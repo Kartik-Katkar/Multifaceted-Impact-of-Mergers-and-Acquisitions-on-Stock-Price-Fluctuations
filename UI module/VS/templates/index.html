@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>CSV Data Plots</h1>
+    <div class="row">
+        {% if company in ["GOOG", "DIS", "UBS", "MRK"] %}
+        <h2>Merger model is used for prediction.</h2>
+    {% endif %}
+        {% for graph in graphs %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="plot">
+                    {{ graph|safe }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="container">
+        <h2>Portfolio Optimization Results</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Metrics</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Optimized Weights (%)</td>
+                    <td>{{ optimized_weights }}</td>
+                </tr>
+                <tr>
+                    <td>Cumulative Returns (%)</td>
+                    <td>{{ cumulative_returns }}</td>
+                </tr>
+                <tr>
+                    <td>Annualized Return (%)</td>
+                    <td>{{ annualized_return }}</td>
+                </tr>
+                <tr>
+                    <td>Annualized Volatility (%)</td>
+                    <td>{{ annualized_volatility }}</td>
+                </tr>
+                <tr>
+                    <td>Sharpe Ratio</td>
+                    <td>{{ sharpe_ratio }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="plot">
+            {{ pie_chart|safe }}
+        </div>
+    </div>
+{% endblock %}

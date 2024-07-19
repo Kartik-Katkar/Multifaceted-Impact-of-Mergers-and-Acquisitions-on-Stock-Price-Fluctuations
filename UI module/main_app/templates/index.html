@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Raleway', sans-serif;
+            background-color: #000000;
+            color: #ffffff; /* white text for better contrast */
+        }
+        .container {
+            display: flex;
+            width: 80%;
+            background-color: #000000; /* black background */
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .sidebar {
+            width: 25%;
+            background-color: #000000; /* black background */
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .button {
+            display: block;
+            margin: 20px 0; /* increased margin for spacing */
+            padding: 20px; /* increased padding for size */
+            background-color: #FF5F1F;
+            color: #000000; /* black text inside buttons */
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            width: 100%;
+            font-size: 24px; /* increased font size */
+        }
+        .button:hover {
+            background-color: #cc4c18;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        label, input, select, button {
+            margin: 20px 0; /* increased margin for spacing */
+            padding: 20px; /* increased padding for size */
+            width: 100%;
+            max-width: 300px;
+            font-size: 20px; /* increased font size */
+        }
+        button {
+            background-color: #FF5F1F;
+            color: #000000; /* black text inside buttons */
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 24px; /* increased font size */
+        }
+        button:hover {
+            background-color: #cc4c18;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <a class="button" href="{{ url_for('app1') }}">Data Acquisition.</a>
+            <a class="button" href="{{ url_for('app2') }}">Data Synthesis.</a>
+        </div>
+        <div class="content">
+            <form action="{{ url_for('company') }}" method="post">
+                <label for="company_name">Select Company Name:</label>
+                <select id="company_name" name="company_name" required>
+                    <option value="AAPL">Apple (AAPL)</option>
+                    <option value="BLK">BlackRock (BLK)</option>
+                    <option value="UBS">UBS (UBS)</option>
+                    <option value="GOOG">Google (GOOG)</option>
+                    <option value="AMZN">Amazon (AMZN)</option>
+                    <option value="MSFT">Microsoft (MSFT)</option>
+                    <option value="TSLA">Tesla (TSLA)</option>
+                    <option value="META">Meta (META)</option>
+                    <option value="JNJ">Johnson & Johnson (JNJ)</option>
+                    <option value="UNH">UnitedHealth (UNH)</option>
+                    <option value="XOM">ExxonMobil (XOM)</option>
+                    <option value="NVDA">NVIDIA (NVDA)</option>
+                    <option value="BAC">Bank of America (BAC)</option>
+                    <option value="DIS">Disney (DIS)</option>
+                    <option value="T">AT&T (T)</option>
+                    <option value="DOW">Dow (DOW)</option>
+                    <option value="CVS">CVS Health (CVS)</option>
+                    <option value="CHTR">Charter Communications (CHTR)</option>
+                    <option value="IBM">IBM (IBM)</option>
+                    <option value="LIN">Linde (LIN)</option>
+                    <option value="LLY">Eli Lilly (LLY)</option>
+                    <option value="ABBV">AbbVie (ABBV)</option>
+                    <option value="WFC">Wells Fargo (WFC)</option>
+                    <option value="HD">Home Depot (HD)</option>
+                    <option value="PG">Procter & Gamble (PG)</option>
+                    <option value="MRK">Merck (MRK)</option>
+                    <option value="NEE">NextEra Energy (NEE)</option>
+                    <option value="NKE">Nike (NKE)</option>
+                    <option value="NFLX">Netflix (NFLX)</option>
+                    <option value="DUK">Duke Energy (DUK)</option>
+                    <option value="MO">Altria (MO)</option>
+                    <option value="HON">Honeywell (HON)</option>
+                    <option value="KO">Coca-Cola (KO)</option>
+                    <option value="PEP">PepsiCo (PEP)</option>
+                    <option value="MCD">McDonald's (MCD)</option>
+                    <option value="CSCO">Cisco (CSCO)</option>
+                    <option value="AAPL">Apple (AAPL)</option>
+                    <option value="PM">Philip Morris (PM)</option>
+                    <option value="INTC">Intel (INTC)</option>
+                    <option value="WMT">Walmart (WMT)</option>
+                    <option value="AXP">American Express (AXP)</option>
+                    <option value="COST">Costco (COST)</option>
+                    <option value="BA">Boeing (BA)</option>
+                    <option value="JPM">JPMorgan Chase (JPM)</option>
+                    <option value="VZ">Verizon (VZ)</option>
+                    <option value="MAR">Marriott (MAR)</option>
+                    <option value="AVGO">Broadcom (AVGO)</option>
+                    <option value="CMCSA">Comcast (CMCSA)</option>                    
+                </select>
+                <!-- <label for="company_type">Select Client Type:</label>
+                <select id="company_type" name="company_type" required>
+                    <option value="low_risk">Low Risk</option>
+                    <option value="medium_risk">Medium Risk</option>
+                    <option value="high_risk">High Risk</option>
+                </select> -->
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

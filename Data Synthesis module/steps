@@ -21,3 +21,6 @@ started the LLM based response part
 
 pip install -q -U google-generativeai
 pip install python-dotenv
+pip install pandas yfinance
+
+url = f'https://financialmodelingprep.com/api/v3/ratios/{ticker}?apikey=yT72Tp1YrJehGBySNBrAgwc5WZ0ZnSif'

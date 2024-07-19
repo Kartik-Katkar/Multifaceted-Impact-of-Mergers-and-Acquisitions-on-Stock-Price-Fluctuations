@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Acquisition</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.png') }}" type="image/png">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <script>
+        function submitForm() {
+            document.getElementById('submit-button').disabled = true;
+            document.getElementById('stop-button').disabled = false;
+            document.getElementById('upload-form').submit();
+        }
+
+        function stopScraping() {
+            document.getElementById('stop-button').disabled = true;
+            document.getElementById('submit-button').disabled = false;
+            document.getElementById('stop-scraping-form').submit();
+        }
+    </script>
+</head>
+<body>
+    <div class="glassmorphism">
+        <h1>Upload a File or Enter a URL</h1>
+
+        <!-- Display flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Form for URL entry -->
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <label for="url">Enter URL:</label>
+            <input type="text" id="url" name="url" placeholder="https://example.com" class="input-field">
+            <button type="button" onclick="submitForm()" id="submit-button" class="button button5">Start Scraping</button>
+        </form>
+
+        <form id="stop-scraping-form" action="/stop_scraping" method="post">
+            <button type="button" onclick="stopScraping()" id="stop-button" class="button button5">Stop Scraping</button>
+        </form>
+
+        <p>OR</p>
+
+        <!-- Form for file upload -->
+        <form id="file-upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <label for="file">Upload a File:</label>
+            <input type="file" id="file" name="file" accept=".pdf,.csv,.mp4,.html,.jpg,.jpeg,.png,.bmp,.gif" class="input-field">
+            <button type="submit" class="button button5">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
