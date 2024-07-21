@@ -10,7 +10,7 @@ def fetch_stock_data(ticker, start, end):
 
 # Function to fetch financial ratios (Debt to Equity and Price Earnings Ratio) from financialmodelingprep API
 def fetch_financial_ratios(ticker):
-    url = f'https://financialmodelingprep.com/api/v3/ratios/{ticker}?apikey=yT72Tp1YrJehGBySNBrAgwc5WZ0ZnSif'
+    url = f'https://financialmodelingprep.com/api/v3/ratios/{ticker}?apikey=YOURAPIKEY'
     response = requests.get(url)
     if response.status_code == 200:
         ratios = response.json()
